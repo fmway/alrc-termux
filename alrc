@@ -1,0 +1,95 @@
+#!/system/bin/bash # Cannot execute
+# ---BASH EXECUTECHECK--- #
+
+# name:.alrc autoload for initial command at Terminal emulator.
+# mode:rcfile like bashrc or shrc or something else
+# sh-shell:bash (bourne again shell)
+
+# .alrc script variant from al & whatisal functions but this specially for /sdcard apply on initial command
+: ' based from al & whatisal functions '
+: ' al & whatisal are minimal functions for /etc/fpath written by @adharudin14 '
+# Do not call me when any sh there, source only!
+
+# ---BASH SHELLCHECK--- #
+[ -z "$PS1" ] && return
+# --------------------- #
+
+# ----- FUNCTION ------ #
+function set_window() {
+
+    title="$*"
+    echo -ne "\033]0;$title \007"
+}
+function al() {
+
+if [ $(basename $0) == "bash" ] || [ $(basename $0) == "bash.bin" ]; then
+
+local my_terminal="$(ps | grep 'term' | awk '{print $9}')"
+local uptimes="$(busybox uptime -s)" > /dev/null 2>&1; 
+local batteries="$(toybox acpi -b | awk '/Battery / { print $3 }')" > /dev/null 2>&1;
+local packages="$(ls /system/bin/| wc -l) (bin) / $(ls /system/xbin/ | wc -l) (xbin)" > /dev/null 2>&1; 
+
+ENV="${ENV:-"/system/etc/mkshrc" }"
+test $ENV;
+if [ $? -eq 0 ]; then
+clear
+echo "
+Hello bash
+Welcome to:
+${my_terminal:-"Unknown Emulator or Termux "}
+$(printf %"$COLUMNS"s |tr " " "-")
+| os >> $(uname -so)
+| arch >> $(uname -m)
+| term >> ${TERM}
+| date >> $(date)
+| shell >> ${0}
+| kernel >> $(uname -r)
+| uptime >> ${uptimes:-"required busybox binary or permission denied!"}
+| battery >> ${batteries:-"required toybox binary or permission denied!"}
+| packages >> ${packages:-"permission denied!"}
+| bash source >> ${0:+$(printf '%s\n' "$BASH_SOURCE")}
+$(printf %"$COLUMNS"s |tr " " "-") ";
+
+: place customisations above this line
+
+echo "alrc: al is a $(type -t al), More informations? you can type \`whatisal'"
+else
+echo "Your device isn't Android"
+return 1
+fi
+
+else echo "Hello $(basename $0), please make sure your shell are bash"; return 1; fi
+}
+function whatisal() {
+
+echo -e "${0:+$(printf '%s\n' "$BASH_SOURCE")}  -whatisal v2.1-alrc_en (03/01/22 04:55:01 WIB) al and whatisal (functions) are minimal autoload for your terminal instead of typing long code at initial command just to display system information now just call the command which takes 1 line.\n";
+echo -e "Definitions: ";
+echo -e "\"al is an exported alias for al\" (by default mkshrc MOD) or if any function named 'al' it must be called \"al is a function\". \n ";
+echo -e "alias al come with mkshrc mod by @7175-xda-devoloper, but function named al come with this resource by @adharudin14 also this function. ";
+echo -e "
+Add command below to the initial command, assume the file path is on the sdcard:
+--------------------
+source /sdcard/.alrc
+--------------------
+then make a new window, Autoload is ready.
+
+usage#1: source ${0:+$(printf '%s\n' "$BASH_SOURCE")} or . ${0:+$(printf '%s\n' "$BASH_SOURCE")}
+
+usage#2: whatisal print this help message and return
+\t al\t  review al and return
+\t sh\t  change shell to sh and exit
+\t su\t  change shell with login as root user and exit
+\t exit\t  change shell and exit \n";
+}
+function _exit()              # Function to run upon exit of shell.
+{
+    echo -e "Goodbye $0"
+    set_window "Window $RANDOM"
+    $0
+}
+trap _exit EXIT
+
+# -------------------------------- #
+source $0 > /dev/null 2>&1 && until false; do sleep 1; done
+set_window "successfully script called via source"; al;
+#
