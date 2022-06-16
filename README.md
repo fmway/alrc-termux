@@ -1,2 +1,5 @@
 # alrc-termux
-2.0
+last version 2.0
+
+Usage:
+'source alrc-termux'
