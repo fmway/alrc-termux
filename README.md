@@ -1,6 +1,6 @@
 # alrc-termux
-last version 2.0
 
+al function for termux called alrc-termux
 ## Instalation without changing motd
 
 ![preview](./y_step_0.jpg)
