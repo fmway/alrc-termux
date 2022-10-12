@@ -1,5 +1,4 @@
-
-for i in /data/data/com.termux/files/usr/etc/profile.d/*.sh; do
+forr i in /data/data/com.termux/files/usr/etc/profile.d/*.sh; do
         if [ -r $i ]; then
                 . $i
         fi
@@ -16,10 +15,12 @@ if [ "$BASH" ]; then
                         . /data/data/com.termux/files/home/.bas>
                 fi
         fi
+  if [ -r /data/data/com.termux/files/home/downloads/alrc ]; th>
+      . /data/data/com.termux/files/home/downloads/alrc
+  fi
+
 fi
 
 
 cowsay -f eyes WELCOME BACK luisadha | lolcat
 neofetch
-
-source /data/data/com.termux/files/home/downloads/alrc
