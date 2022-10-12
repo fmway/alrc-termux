@@ -28,11 +28,11 @@ local my_terminal="$(ps | grep 'term' | awk '{print $9}')"
 local uptimes="$(busybox uptime -s)" > /dev/null 2>&1; 
 local batteries="$(toybox acpi -b | awk '/Battery / { print $3 }')" > /dev/null 2>&1;
 local packages="$(ls /system/bin/| wc -l) (bin) / $(ls /system/xbin/ | wc -l) (xbin)" > /dev/null 2>&1; 
-
+local packages_termux="$(ls /data/data/com.termux/files/usr/bin | wc -l) (termux bin) " &>/Dev/null;
 ENV="${ENV:-"/system/etc/mkshrc" }"
 test $ENV;
 if [ $? -eq 0 ]; then
-clear
+
 echo "
 Hello bash
 Welcome to:
@@ -47,6 +47,7 @@ $(printf %"$COLUMNS"s |tr " " "-")
 | uptime >> ${uptimes:-"required busybox binary or permission denied!"}
 | battery >> ${batteries:-"required toybox binary or permission denied!"}
 | packages >> ${packages:-"permission denied!"}
+| packages termux >> ${packages_termux:-"ls not found!"}
 | bash source >> ${0:+$(printf '%s\n' "$BASH_SOURCE")}
 $(printf %"$COLUMNS"s |tr " " "-") ";
 
