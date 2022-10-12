@@ -1,7 +1,14 @@
 # alrc-termux
 last version 2.0
 
-## Instalation 
+## Instalation without changing motd
+
+![preview](./y_step_0.jpg)
+
+Copy raw profile at this repo and `nano /data/data/com.termux/files/usr/etc/profile`
+Select all and paste it, CTRL+X, Y, Enter.
+
+## Instalation changing motd
 
 * Step 0
 
@@ -32,5 +39,8 @@ last version 2.0
 
 ![preview](./z_step_6.jpg)
 
-Selamat anda berhasil menginstal motd dari saya atau bashrc
+ You successfully installed motd from me or bashrc
+
+Install 
+> cowsay, figlet, lolcat, and neofetch when necessary 
 
