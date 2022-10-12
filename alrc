@@ -28,7 +28,7 @@ local my_terminal="$(ps | grep 'term' | awk '{print $9}')"
 local uptimes="$(busybox uptime -s)" > /dev/null 2>&1; 
 local batteries="$(toybox acpi -b | awk '/Battery / { print $3 }')" > /dev/null 2>&1;
 local packages="$(ls /system/bin/| wc -l) (bin) / $(ls /system/xbin/ | wc -l) (xbin)" > /dev/null 2>&1; 
-local packages_termux="$(ls /data/data/com.termux/files/usr/bin | wc -l) (termux bin) " &>/Dev/null;
+local packages_termux="$(ls /data/data/com.termux/files/usr/bin | wc -l) (termux bin) " &>/dev/null;
 ENV="${ENV:-"/system/etc/mkshrc" }"
 test $ENV;
 if [ $? -eq 0 ]; then
