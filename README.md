@@ -1,4 +1,4 @@
-# alrc-termux
+# $HOME/downloads/alrc
 
 al function for termux called alrc-termux
 ## Instalation without changing motd
