@@ -1,7 +1,11 @@
 #!/system/bin/bash # Cannot execute
 # ---BASH EXECUTECHECK--- #
 
-# name:.alrc autoload for initial command at Terminal emulator.
+# name:.alrc autoload for initial command at Terminal emulator, but this for Termux.
+# version : v1.1 (11/01/2023) UTC+7
+# license : GNU/GPLv3
+# copyright (c) 2023 @adharudin14@gmail.com
+
 # mode:rcfile like bashrc or shrc or something else
 # sh-shell:bash (bourne again shell)
 
@@ -26,9 +30,10 @@ if [ $(basename $0) == "bash" ] || [ $(basename $0) == "bash.bin" ]; then
 
 local my_terminal="$(ps | grep 'term' | awk '{print $9}')"
 local uptimes="$(busybox uptime -s)" > /dev/null 2>&1; 
-local batteries="$(toybox acpi -b | awk '/Battery / { print $3 }')" > /dev/null 2>&1;
+local batteries="$(termux-battery-status | head -n 3 | awk '{print $2}' | tail -n 1)" > /dev/null 2>&1;
 local packages="$(ls /system/bin/| wc -l) (bin) / $(ls /system/xbin/ | wc -l) (xbin)" > /dev/null 2>&1; 
 local packages_termux="$(ls /data/data/com.termux/files/usr/bin | wc -l) (termux bin) " &>/dev/null;
+
 ENV="${ENV:-"/system/etc/mkshrc" }"
 test $ENV;
 if [ $? -eq 0 ]; then
