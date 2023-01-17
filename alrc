@@ -31,7 +31,7 @@ if [ $(basename $0) == "bash" ] || [ $(basename $0) == "bash.bin" ]; then
 local my_terminal="$(ps | grep 'term' | awk '{print $9}')"
 local uptimes="$(busybox uptime -s)" > /dev/null 2>&1; 
 local batteries="$(termux-battery-status | head -n 3 | awk '{print $2}' | tail -n 1)" > /dev/null 2>&1;
-local packages="$(ls /system/bin/| wc -l) (bin) / $(ls /system/xbin/ | wc -l) (xbin)" > /dev/null 2>&1; 
+# local packages="$(ls /system/bin/| wc -l) (bin) / $(ls /system/xbin/ | wc -l) (xbin)" > /dev/null 2>&1; 
 local packages_termux="$(ls /data/data/com.termux/files/usr/bin | wc -l) (termux bin) " &>/dev/null;
 
 ENV="${ENV:-"/system/etc/mkshrc" }"
@@ -41,7 +41,7 @@ if [ $? -eq 0 ]; then
 echo "
 Hello bash
 Welcome to:
-${my_terminal:-"Unknown Emulator or Termux "}
+${my_terminal:-"Termux "}
 $(printf %"$COLUMNS"s |tr " " "-")
 | os >> $(uname -so)
 | arch >> $(uname -m)
@@ -50,9 +50,8 @@ $(printf %"$COLUMNS"s |tr " " "-")
 | shell >> ${0}
 | kernel >> $(uname -r)
 | uptime >> ${uptimes:-"required busybox binary or permission denied!"}
-| battery >> ${batteries:-"required toybox binary or permission denied!"}
-| packages >> ${packages:-"permission denied!"}
-| packages termux >> ${packages_termux:-"ls not found!"}
+| battery >> ${batteries:-"something wen't wrong!"}
+| packages >> ${packages_termux:-"ls not found!"}
 | bash source >> ${0:+$(printf '%s\n' "$BASH_SOURCE")}
 $(printf %"$COLUMNS"s |tr " " "-") ";
 
