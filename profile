@@ -1,26 +1,28 @@
-forr i in /data/data/com.termux/files/usr/etc/profile.d/*.sh; do
-        if [ -r $i ]; then
-                . $i
-        fi
+for i in /data/data/com.termux/files/usr/etc/profile.d/*.sh; do
+	if [ -r $i ]; then
+		. $i
+	fi
 done
 unset i
 
-# Source etc/bash.bashrc and ~/.bashrc also for interactive bas>
+# Source etc/bash.bashrc and ~/.bashrc also for interactive bash login shells:
 if [ "$BASH" ]; then
         if [[ "$-" == *"i"* ]]; then
-                if [ -r /data/data/com.termux/files/usr/etc/bas>
-                        . /data/data/com.termux/files/usr/etc/b>
+                if [ -r /data/data/com.termux/files/usr/etc/bash.bashrc ]; then
+                        . /data/data/com.termux/files/usr/etc/bash.bashrc
                 fi
-              if [ -r /data/data/com.termux/files/home/.bashrc >
-                        . /data/data/com.termux/files/home/.bas>
+
+                if [ -r /data/data/com.termux/files/home/.bashrc ]; then
+                        . /data/data/com.termux/files/home/.bashrc
                 fi
         fi
-  if [ -r /data/data/com.termux/files/home/downloads/alrc ]; th>
-      . /data/data/com.termux/files/home/downloads/alrc
-  fi
-
+#
 fi
 
+
+  if [ -r /data/data/com.termux/files/home/downloads/alrc ]; then
+      . /data/data/com.termux/files/home/downloads/alrc
+  fi
 
 cowsay -f eyes WELCOME BACK luisadha | lolcat
 neofetch
