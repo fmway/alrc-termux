@@ -9,9 +9,8 @@
 3. make install
 
 4. Step 1:
-
-   source **~/.local/bin/bashmarks.sh** from within your **~.bash\_profile** or **~/.bashrc** file
+   source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file
    
    Step 2:
 
-   bash setup-bash-bashrc.conf
+   bash setup.bash.bashrc.conf
