@@ -16,7 +16,7 @@ usage#2:
 
          chsh -s bash && login     change to bash shell and exit
 
-         whatisal print this help message and return
+         whatisal                   print this help message and return
 
          
 ## Install
