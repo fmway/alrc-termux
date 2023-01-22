@@ -76,7 +76,7 @@ echo -e "\"al is an exported alias for al\" (by default mkshrc MOD) or if any fu
 echo -e "alias al come with mkshrc mod by @7175-xda-devoloper, but function named al come with this resource by @adharudin14 also this function. ";
 
 echo -e "
-usage#1: source **~/downloads/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file
+usage#1: source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file
 
 usage#2: whatisal print this help message and return
 \t al\t  review al and return
