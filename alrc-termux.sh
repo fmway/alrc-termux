@@ -69,8 +69,7 @@ else echo "Hello $(basename $0), please make sure your shell are bash"; return 1
 }
 function whatisal() {
 
-echo -e "${NAME} -whatisal v2.2-en (19/01/23 00:48:01 WIB) al and whatisal (functions) are minimal autoload for your termux alternate of neofetch to display system information just call it through source within your .bashrc.\n";
-
+echo -e "${NAME} -whatisal v2.3-en (22/01/23 10:01:35 WIB) al and whatisal (functions) are minimal autoload for your termux alternate of neofetch to display system information just call it through source within your .bashrc.\n"
 echo -e "Definitions: ";
 echo -e "\"al is an exported alias for al\" (by default mkshrc MOD) or if any function named 'al' it must be called \"al is a function\". \n ";
 echo -e "alias al come with mkshrc mod by @7175-xda-devoloper, but function named al come with this resource by @adharudin14 also this function. ";
@@ -80,9 +79,7 @@ usage#1: source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profi
 
 usage#2: whatisal print this help message and return
 \t al\t  review al and return
-\t sh\t  change shell to sh and exit
-\t su\t  change shell with login as root user and exit
-\t exit\t  change shell and exit \n";
+\t chsh -s bash\t  change shell to bash and exit \n";
 }
 function _exit()              # Function to run upon exit of shell.
 {
