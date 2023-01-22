@@ -8,9 +8,13 @@
 
 3. make install
 
-4. Step 1:
+4. Manual step:
    source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file
    
-   Step 2:
+   Quick step:
 
    bash setup.bash.bashrc.conf
+
+## Uninstall
+   
+   bash restore.bash.bashrc.conf
