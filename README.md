@@ -32,8 +32,12 @@ usage#2:
    
    Quick step:
 
-   bash setup.bash.bashrc.conf
+   bash setup.bash.bashrc.conf (Do it once!)
 
 ## Uninstall
    
    bash restore.bash.bashrc.conf
+
+## Update
+
+  Reclone this repo and type make install, do not execute setup.bashrc.conf if you've done it before.
