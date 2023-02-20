@@ -28,8 +28,8 @@ usage#2:
 3. make install
 
 4. Manual step:
-   source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file (preferably .bash_profile)
-   
+   source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file (preferably .bash_profile) Don't forget to add the PATH variable as well (export PATH=$PATH:/data/data/com.termux/files/home/.local/bin)
+ 
    Quick step:
 
    bash setup.bash.bashrc.conf (Do it once!, some scripts don't run with this installation method, We recommend doing method number 4)
