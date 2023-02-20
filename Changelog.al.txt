@@ -1,0 +1,43 @@
+al
+whatisal
+banner
+... very older
+Add shell check
+Add bash check
+Add device check
+Add set_window function 
+Add source check
+Add trap exit 
+... older
+
+11 Jan 2023 (???)
+- Fix on battery
+- Remove trap exit
+- And some fix
+
+27 Jan 2023 (3.0)
++ Add feature bashrc
+  # Aliases
+  = Add personal aliases
+  = Add mksh emulated aliases
+  # Functions
+  = brandomusic builtin function
+  = ranpper-termux builtin function 
+  = Add many functions
+  # Env Variable
+  = fix HOME
+
+11 Feb 2023 (3.1)
++ Improve interface
+  = Make border for al's function
++ Main Alrc-termux 
+  = Add alcat's functions
++ Add alog function
+- Fix bug brandomusic
+- Fix some bugs
+- remove packages variable (+package_termux variable)
+
+13 Feb 2023 (3.1.1)
+- Fix bugs
+- Changes some teks
+
