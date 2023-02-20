@@ -27,17 +27,13 @@ usage#2:
 
 3. make install
 
-4. Manual step:
-   source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file (preferably .bash_profile) Don't forget to add the PATH variable as well (export PATH=$PATH:/data/data/com.termux/files/home/.local/bin)
+4. source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file (preferably .bash_profile) Don't forget to add the PATH variable as well (export PATH=$PATH:/data/data/com.termux/files/home/.local/bin)
  
-   Quick step:
-
-   bash setup.bash.bashrc.conf (Do it once!, some scripts don't run with this installation method, We recommend doing method number 4)
-
 ## Uninstall
    
-   bash restore.bash.bashrc.conf
+   hash uninstall-alrc-termux.sh
 
 ## Update
 
-  Reclone this repo and type make install, do not execute setup.bashrc.conf if you've done it before.
+  Reclone this repo and then type make install
+  rm -rf ~/alrc-termux & Do method number 1
