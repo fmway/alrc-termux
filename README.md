@@ -28,11 +28,11 @@ usage#2:
 3. make install
 
 4. Manual step:
-   source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file
+   source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file (preferably .bash_profile)
    
    Quick step:
 
-   bash setup.bash.bashrc.conf (Do it once!)
+   bash setup.bash.bashrc.conf (Do it once!, some scripts don't run with this installation method, We recommend doing method number 4)
 
 ## Uninstall
    
