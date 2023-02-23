@@ -40,3 +40,7 @@ usage#2:
   Reclone this repo and then type make install
 
   rm -rf ~/alrc-termux & Do method number 1
+
+### Doc
+
+https://telegra.ph/Sejarah-Alrc-termux-02-23
