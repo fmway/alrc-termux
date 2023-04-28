@@ -18,12 +18,12 @@ usage#2:
 
          whatisal                   print this help message and return
 
-##Feature 
+## Feature 
 
 
-AA Automation memainkan lagu secara otomatis saat Anda membuka Termux untuk kali pertama
+* Automation plays songs automatically when you open Termux for the first time
 
-MOBuka gambar acak menggunakan imjbrand.
+* Open a random image using imjbrand. 
 
 
 ## Install
