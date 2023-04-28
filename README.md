@@ -18,7 +18,14 @@ usage#2:
 
          whatisal                   print this help message and return
 
-         
+##Feature 
+
+
+AA Automation memainkan lagu secara otomatis saat Anda membuka Termux untuk kali pertama
+
+MOBuka gambar acak menggunakan imjbrand.
+
+
 ## Install
 
 1. cd $HOME &&```git clone https://github.com/luisadha/alrc-termux.git```
