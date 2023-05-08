@@ -1,4 +1,4 @@
-## alrc-termux 
+## alrc-termux | dotfiles | .bash_profile 
 
 alrc-termux.sh -whatisal v2.3-en (22/01/23 10:01:35 WIB) al and whatisal (functions) are minimal autoload for your termux alternate of neofetch to display system information just call it through source within your .bashrc.
 
