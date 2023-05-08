@@ -23,7 +23,7 @@ usage#2:
 
 * Automation plays songs automatically when you open Termux for the first time
 
-* Open a random image using imjbrand. 
+* Automation Open a random image using imjpgrand 
 
 
 ## Install
