@@ -40,23 +40,23 @@ Add trap exit
 13 Feb 2023 (3.1.1)
 - Fix bugs
 - Changes some teks
+- install_modal() function added
 
-11 Apr 2023 (3.2.0)
+10 Juni 2023 (3.2.0)
+- al option
+- al help style json improvements
+- al_$opt variable environments new
+- al_scan_opt() function added new
+- egvarexpand2 minor fix
 
- - open-random-jpg-files --> imjpgrand
+19 Juni 2023 (3.2.2)
+- renamed egvarexpand2 to alvar
+- Improve brandomusicx
+- add cattyp() function's
+- change decripstions to whatisal
+- Add check_dependencies to begining
+_ check_ip.sh files added
+- _alcat() improvement
+- and etc
 
- - brandomusic varian X --> brandomusicx
 
- - al options --> al function
-
- - ps1 --> modif environment
-
- - install function into script --> install_modal
-
- - brandomusic varian Q --> brandomusicq
-
- - egvarexpan now can customize your VARIABLE --> egvarexpan2
-
- - loghis --> new aliases
-
- and etc..
