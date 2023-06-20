@@ -1,0 +1,55 @@
+set -o history
+
+#Just pure awesomeness!
+bind '"\e[A"':history-search-backward
+bind '"\e[B"':history-search-forward
+bind Space:magic-space
+
+# Misc -------------------------------------------------------------
+# don't put duplicate lines in the history. See bash(1) for more options
+# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups:erasedups
+
+# ... or force ignoredups and ignorespace
+# export HISTCONTROL=ignoreboth:erasedups
+
+# Don't put 'history' commands themselves in the history
+export HISTIGNORE='history*'
+
+# Keep no more than 1,000,000 lines
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+
+# Append, don't overwrite history
+shopt -s histappend
+
+# Check window size after each command to avoid annoying effects of resizing
+shopt -s checkwinsize
+
+# Ignore typoes
+shopt -s cdspell
+
+# This will ensure that multiple line commands stay together in your history.
+shopt -s cmdhist
+
+PROMPT_DIRTRIM=2
+
+
+if [ -n "$SSH_CLIENT" ]; then text=" ssh"
+
+fi
+alias test_opentelegram="open https://t.me/adharudin14"
+alias telegram="echo 'Please tick remember my choice, once you see the popup and choose html viewer!' && xdg-open --view ~/downloads/script.html"
+export PATH=$PATH:/system/bin:/usr/local/bin:$HOME/.local/bin
+ . /data/data/com.termux/files/home/.local/bin/printfetch.sh 2> /dev/null;
+ . /data/data/com.termux/files/home/.local/bin/alrc-termux.sh > /dev/null 2>&1;
+
+ brandomusicq
+# brandomusicx
+# brandomusic  
+ open https://t.me/adharudin14
+imjpgrand ~/daydreams;
+cd ~; timg "$(realpath "${ARG:=$(busybox ls **/*.jpg | shuf -n1)}")"; cd -;
+
+refresh_source
+

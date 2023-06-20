@@ -1,8 +1,8 @@
-#!/system/bin/bash # Cannot execute
+#!/data/data/com.termux/files/usr/bin/bash # Cannot execute, source file
 # ---BASH EXECUTECHECK--- #
 
 # name:.alrc autoload for initial command at Terminal emulator, but this for Termux.
-# version : alrc v3.0 (13/02/2023) UTC+7
+# version : alrc v3.2.2 (19/06/2023) UTC+7
 # license : GNU/GPLv3
 # copyright (c) 2023 @adharudin14@gmail.com
 
@@ -16,13 +16,102 @@
 
 NAME="${0:+$(printf '%s\n' "$(basename ${BASH_SOURCE})" )}"
 FULLNAME="${0:+$(printf '%s\n' "$BASH_SOURCE" )}"
-VERSION="3.1.1"
+VERSION="3.2.2"
 
+# Add 26 March
+# add 19 Jun 2023
+check_dependency awk
+check_dependency bc
+check_dependency tput
+check_dependency busybox
+check_dependency wc
+check_dependency mapfile
+check_dependency getconf
+check_dependency termux-battery-status
+check_dependency gdb
+check_dependency sed
+check_dependency xargs
+check_dependency cut
+
+bold=$(tput bold)
+underline=$(tput smul)
+italic=$(tput sitm)
+info=$(tput setaf 2)
+error=$(tput setaf 160)
+warn=$(tput setaf 214)
+reset=$(tput sgr0)
+
+function _about_author() {
+  echo -e "Created by : @luisadha " >&2;
+  echo -e "Copyright (c) 2023" >&2;
+}
+# echo "${info}INFO${reset}: This is an ${bold}info${reset} message"                ┆ 50 # echo "${error}ERROR${reset}: This is an ${underline}error${reset} message"
+# echo "${warn}WARN${reset}: This is a ${italic}warning${reset} message"       
 # ---BASH SHELLCHECK--- #
 [ -z "$PS1" ] && return
 # --------------------- #
 
 # ----- ALRC BASE FUNCTION ------ #
+
+# --------+ NEW!
+function _alcat () {
+# for source purpose test only
+# cat file ini setelah prompt pertama muncul/1x penggunaan
+# nama fungsi tidak akan ikut terhapus hanya pengunaanya saja yang 1x
+# based bashrcat 
+# alcat version 2 named _alcat
+
+
+local _last_prog=$_
+local _filename='alrc-termux.sh'
+local _function_name=${FUNCNAME[0]}
+
+if [ "$(basename ${_last_prog} 2>/dev/null )" != "$_filename" ]; then
+command_not_found_handle ${_function_name} || \
+# echo -e "\n${_function_name}: command not found" >&2;
+ unset _alcat;
+  return 1
+else
+ cat "$_last_prog";
+fi
+ return 0
+}
+
+function install_modal () {
+local opts="$1"
+local mod_name=("imjpgrand" "ranpper-termux" "brandomusicx")
+if [ -z "$opts" ]; then
+echo ""
+elif [ "$opts" == "imjpgrand" ]; then
+  source alrc-termux.sh
+local name="${mod_name[0]}"
+local parse=$(echo "$(type -a $name | wc -l) - 3" | bc)
+type -a $name | tail -n $parse | head -n "$(echo "$parse - 1" | bc)" > ${name}.sh
+sleep 1;
+  echo "${info}INFO${reset}: Creating... file for ${bold}${name}${reset} "
+  sleep 1;
+ echo "${info}INFO${reset}: Done!"
+elif [ "$opts" == "brandomusic" ]; then
+echo "${error}ERROR${reset}: This is a ${underline}specially${reset} function, can't export to file!";
+elif [ "$opts" == "ranpper-termux" ]; then
+  source alrc-termux.sh
+local name1="${mod_name[1]}"
+local parse1=$(echo "$(type -a $name1 | wc -l) - 3" | bc)
+  type -a $name1 | tail -n $parse1 | head -n "$(echo "$parse1 - 1" | bc)" > ${name1}.sh
+  sleep 1;
+  echo "${info}INFO${reset}: Creating... file for ${bold}${name1}${reset} "
+  sleep 1;
+  echo "${info}INFO${reset}: Done!"
+elif [ "$opts" == "brandomusicx" ]; then
+  echo ""
+else
+  echo ""
+fi
+
+
+
+
+}
 
 function alog () {
 cat ~/.local/bin/Changelog.al.txt
@@ -39,8 +128,7 @@ function set_window() {
 }
 function al() {
 
-if [ $(basename $0) == "bash" ] || [ $(basename $0) == "bash.bin" ]; then
-
+#  echo "$(basename $0)"
 local my_terminal="$(ps | grep 'term' | awk '{print $9}')"
 local uptimes="$(busybox uptime -s)" > /dev/null 2>&1; 
 local batteries="$(termux-battery-status | head -n 3 | awk '{print $2}' | tail -n 1| sed 's/,/%/g')"
@@ -49,6 +137,9 @@ local batteries="$(termux-battery-status | head -n 3 | awk '{print $2}' | tail -
 local packages_termux="$(ls /data/data/com.termux/files/usr/bin | wc -l) (termux usr/bin) " &>/dev/null;
 local shell="$(echo "$0" | awk '{gsub(/.*[/]|[.].*/, "", $0)} 1'
 ) ";
+export opt="$1"
+if [ -z "$opt" ]; then
+  if [ $(basename $0) == "bash" ] || [ $(basename $0) == "bash.bin" ]; then
 icon='|'
 abc=$(echo "${icon} os >> $(uname -so)" | wc -L); cba=$(echo "$COLUMNS - $abc" | bc);
 bcd=$(echo "${icon} arch >> $(uname -m)" | wc -L); dcb=$(echo "$COLUMNS - $bcd" | bc);
@@ -61,7 +152,7 @@ hij=$(echo "${icon} battery >> ${batteries}" | wc -L); jih=$(echo "$COLUMNS - $h
 ijk=$(echo "${icon} packages >> ${packages_termux}" | wc -L); kji=$(echo "$COLUMNS - $ijk" | bc);
 jkl=$(echo "${icon} bash source >> ${NAME}" | wc -L); lkj=$(echo "$COLUMNS - $jkl" | bc);
 
-ENV="${ENV:-"/system/etc/mkshrc" }"
+ENV="${ENV:-"/system/etc/mkshrc"}"
 test $ENV;
 if [ $? -eq 0 ]; then
 
@@ -91,10 +182,116 @@ return 1
 fi
 
 else echo "Hello $(basename $0), please make sure your shell are bash"; return 1; fi
+
+elif [ "$opt" == "os" ]; then
+  uname -so;
+  export  al_"$opt"="$(uname $_)"
+ 
+elif [ "$opt" == "arch" ]; then
+  export  al_"$opt"="$opt"
+ dpkg --print-architecture;
+ export  al_"$opt"="$(dpkg $_)"
+
+elif [ "$opt" == "term" ]; then
+  echo ${TERM};
+  export  al_"$opt"="$(echo $_)"
+
+elif [ "$opt" == "date" ]; then
+  date;
+  export  al_"$opt"="$(date)"
+
+elif [ "$opt" == "shell" ]; then
+ echo "${shell}";
+ export  al_"$opt"="$(echo $_)"
+
+elif [ "$opt" == "kernel" ]; then
+  uname -r;
+  export  al_"$opt"="$(uname $_)"
+
+elif [ "$opt" == "uptime" ]; then
+  echo ${uptimes};
+  export  al_"$opt"="$(echo $_)"
+
+elif [ "$opt" == "battery" ]; then
+  echo "${batteries}";
+  export  al_"$opt"="$(echo $_)"
+
+elif [ "$opt" == "packages" ]; then
+ echo "${packages_termux}";
+ export  al_"$opt"="$(echo $_)"
+
+elif [ "$opt" == "bash_source" ]; then
+  echo "${NAME}"
+  export  al_"$opt"="$(echo $_)"
+  ####
+elif [ "$opt" == "ab" ]; then # bug#226_3761a
+  getprop ro.build.ab_update;
+  export  al_"$opt"="$(getprop $_)"
+if [ "$(getprop ro.build.ab_update)" == "true" ]; then
+  export al_"$opt"="$(getprop $_)"
+  echo "We detected that your device have an A/B system partition."
+fi
+
+elif [ "$opt" == "abi" ]; then
+  getprop ro.product.cpu.abi;
+  export  al_"$opt"="$(getprop $_)"
+
+elif [ "$opt" == "treble" ]; then
+  getprop ro.treble.enabled;
+  export al_"$opt"="$(getprop $_)"
+  if [ "$(getprop ro.treble.enabled)" == "true" ]; then
+  echo "Your device includes support for Project Treble!"
+  fi
+
+elif [ "$opt" == "binder_arch" ]; then
+  getconf LONG_BIT;
+  export  al_"$opt"="$(getconf $_)"
+
+elif [ "$opt" == "android" ]; then
+  getprop ro.build.version.release;
+  export  al_"$opt"="$(getprop $_)"
+
+elif [ "$opt" == "sar" ]; then
+  case "$(getprop ro.build.version.release)" in
+  9) if [ $(getprop ro.build.system_root_image) == true ]; then
+        echo "true";
+          export  al_"$opt"="$(echo true)"
+
+      fi;;
+ 1[0-12]) if [ $(getprop ro.build.system_root_image) == false ]; then
+        echo "true"; 
+        echo "Your device includes support for system-as-root!"
+          export  al_"$opt"="$(echo true)"
+
+      fi;;
+   *)
+		echo "false"
+    export  al_"$opt"="$(echo unknown)"
+    ;;
+  esac
+
+elif [ "$opt" == "cpu_arch" ]; then #bug 2722_234b {not consist result }
+  echo "this options require internet connection!"
+  echo "$OPTARG"
+  echo
+  curl -sS "https://en.m.wikipedia.org/wiki/ARM_architecture_family?action=raw" | grep -Eoi "name         = ARM 64/32-bit" | sed 's/ //g' | cut -c"6-" | sed 's/\/32-bit//g';
+  export  al_"$opt"="$(curl $_)"
+
+elif [ "$opt" == "vndk" ]; then
+  getprop ro.vndk.version;
+  export  al_"$opt"="$(getprop $_)"
+
+else
+echo -e "Available options: \n" >&2;
+
+  alcat | grep -w '$opt' | awk '{print $5}' | sed 's/\];//g' | sed 's/\'\$opt'//g' | sed "s/''//g" | sort | grep -v -e '^[[:space:]]*$' | xargs -d "\n" | awk '{for(i=1;i<NF;i++)if(i!=NF){$i=$i","}  }1' | sed 's/^/[/' | sed 's/$/]/'  
+fi
+
+
 }
 function whatisal() {
 
-echo -e "${NAME} -whatisal v$VERSION-en (13/02/23 15:48:37 WIB) al and whatisal (functions) are minimal autoload for your termux alternate of neofetch to display system information just call it through source within your .bashrc.\n"
+echo -e "${NAME} -whatisal v$VERSION-en (19/06/23 21:14:37 WIB) al and whatisal (functions) are minimal autoload for your termux alternate of neofetch to display system information just call it through source within your .bashrc.\n"
 echo -e "Definitions: ";
 echo -e "\"al is an exported alias for al\" (by default mkshrc MOD) or if any function named 'al' it must be called \"al is a function\". \n ";
 echo -e "alias al come with mkshrc mod by @7175-xda-devoloper, but function named al come with this resource by @adharudin14 also this function. ";
@@ -104,7 +301,11 @@ usage#1: source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profi
 
 usage#2: whatisal print this help message and return
 \t al\t  review al and return
-\t chsh -s bash\t  change shell to bash and exit \n";
+\t al help\t  print available options using json style
+\t al_scan_opt\t  export all output from al options to enviroment var. use \`env\' or \`alvar\ al' to see effect al_scan_opt.
+\t alvar\t  print variable name are exported
+\t chsh -s bash\t  change shell to bash and exit \n
+";
 }
 #function _exit()              # Function to run upon exit of shell.
 #{
@@ -118,7 +319,7 @@ usage#2: whatisal print this help message and return
 # ----- ALRC MISC ------- #
 # -------------------------------- #
 source $0 > /dev/null 2>&1 && until false; do sleep 1; done
-set_window "successfully script called via source"; al;
+set_window "successfully script called via source"; al; 
 # --------------------------------- #
 
 # ----- BASHRC ---------- #
@@ -126,9 +327,12 @@ set_window "successfully script called via source"; al;
 ### bashrc add  27 jan
  
 ##- Enviroment variable
-unset HOME
-HOME=${HOME:=/data/data/com.termux/files/home} # fix home
-export HOME
+unset HOME USER
+HOME="${HOME:=/data/data/com.termux/files/home}" # fix home
+USER="${USER:-$(id -un)}"
+HOSTNAME="$(getprop net.hostname)"
+PS1='\[\e[0;36m\]\u@${HOSTNAME}:\w${text}$\[\e[m\]'
+export HOME USER HOSTNAME PS1
 
 ##- Aliases
 
@@ -148,15 +352,16 @@ alias brandomusic+set_autoremove="sed 's/\ brandomusic-cache-clear\.sh/\#\ brand
 alias cd0='cd ~/storage/shared'
 alias cdd='cd ~/storage/downloads'
 alias cddc='cd ~/storage/dcim'
+alias cddoc='cd ~/storage/shared/Documents'
 alias cdm='cd ~/storage/music'
 alias cdmo='cd ~/storage/movies'
 alias cdsd='cd /sdcard'
 alias cdpic='cd ~/storage/pictures'
 alias chx='chmod +x'
 alias cuprog='coreutils --coreutils-prog=${@}'
-alias deviceab_check='getprop ro.build.ab_update'
+alias sdcardd='busybox ls /sdcard | grep "^D*"'
 alias downtree='tree ~/storage/downloads'
-alias egvarexpan='echo ${!BASH*}'
+alias egvarexpandemo='echo ${!BASH*}'
 alias expcat='cp -f ${1} ${PREFIX}/bin/$1 &>/dev/null; chmod +xr ${PREFIX}/bin/${1} &>/dev/null; echo >&2 "error: missing arguments" '
 alias fetch_colorbar='256colors2 | head -n 2 | tail -n 1'
 alias fix_ctypes="exec "$BASH""
@@ -165,13 +370,22 @@ alias la='exa --icons -lgha --group-directories-first'
 alias ll='ls -lh'
 alias lrsaw='busybox ls -rSaw ${COLUMNS}'
 alias ls='exa --icons'
+alias lw='ls' # if you typo will redirect to similiar commoane (ls)
 alias lsa='ls -lah'
 alias lt='exa --icons --tree'
 alias lta='exa --icons --tree -lgha'
 alias lol='echo 'your\ mom''
 alias neodistro='neofetch --ascii_distro'
-alias nomediacheck='cd $OLDPWD; cd /sdcard; printf "%s %s %s\n" "$(find . ! -readable -prune -o -name "*.nomedia" -type f -print | wc -l)" "totals .nomedia" "on /sdcard"; cd - &>/dev/null;'
+alias check_jpgfiles='cd $OLDPWD; cd /sdcard; printf "%s %s %s %s\n" "$(find . ! -readable -prune -o -name "*.jpg" -type f -print | wc -l)" "totals .jpg" "files on /sdcard"; cd - &>/dev/null;'
+
+alias check_nomedia='cd $OLDPWD; cd /sdcard; printf "%s %s %s\n" "$(find . ! -readable -prune -o -name "*.nomedia" -type f -print | wc -l)" "totals .nomedia" "on /sdcard"; cd - &>/dev/null;'
 alias open='termux-open'
+alias openpdf='open --content-type pdf'
+alias opendoc='open --content-type doc'
+alias openppt='open --content-type ppt'
+# alias openexcel='open --content-type'
+alias openhtml='open --content-type html'
+alias opentxt='open --content-type txt'
 alias pacupd='pkg update'
 alias pacupg='pkg upgrade'
 alias pacupgupd='pkg update && pkg upgrade'
@@ -179,12 +393,49 @@ alias prefix='cd $PREFIX'
 alias preview='fzf --preview='\''bat --color=always --style=numbers --theme OneHalfDark {}'\'' --preview-window=down'
 alias proot-dinstalled='cd /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs; ls;'
 alias proot-dlogin='proot-distro login '
-alias refreshprofile='source /data/data/com.termux/files/home/.bash_profile' #for refresh profile
+#alias refresh_profile='source /data/data/com.termux/files/home/.bash_profile' #for refresh profile
 alias vendor='getprop ro.product.manufacturer'
+# add periode 28-29 March
+alias loghis='echo 'login' >> ~/.bash_history; login'
+# convert loghis to login in body .bash_history
+# 19 juni
+alias refresh_source='echo '_alcat' >> ~/.bash_history && source ~/.local/bin/alrc-termux.sh'
+## FUNCTION
 
+function cattyp() {
+# by luisadha
+  if [ "$(type -t $1)" == "function" ]; then
+echo "$(declare -f $1)";
 
-##- Functions
+elif [ "$(type -t $1)" == "alias" ]; then
+  echo "$(alias $1)";
+elif [ "$(type -t $1)" == "file" ]; then
+  echo "$(cat $(type -p $1))";
+else
+  echo "$1 is'nt function, alias or file.";
+fi
 
+}
+declare -f -x cattyp
+function al_scan_opt {
+# by luisadha
+declare -a "$(al help 2>&1 | sed 's/,//g' | sed 's/\[//g' | sed 's/\]//g' | sed 's/^/VARIABEL=/g' | sed 's/\"//g' )"
+
+for i in ${VARIABEL[@]}; do
+  
+  al $i &> /dev/null;
+done
+echo "Scanned!"
+}
+declare -f -x al_scan_opt
+function check_dependency() {
+# by luisadha
+    if ! (builtin command -V "$1" >/dev/null 2>&1); then
+        echo "missing dependency: can't find $1"
+        return 1
+    fi
+}
+declare -f -x check_dependency
 function setenv {
 # function mksh
 	eval export "\"$1\""'="$2"'
@@ -197,9 +448,84 @@ hname=$(busybox ifconfig wlan0 | awk '/inet / { print $2 }' | sed -e s/addr:// )
 declare -f -x ipwifi 
 function bh { bash -c 'help '"$@"; }
 declare -f -x bh
+function imjpgrand {
+# by luisadha
+dir="${1:+"${1}/*.jpg"}"
+wd="${1-"${PWD}/*.jpg"}"
+files=$(busybox ls ${dir:-${wd}})
+ n=${#files[@]}
+rand="${files[RANDOM % n]}"
+img="$(printf "${0:+${rand}}" | shuf -n 1)";
+
+termux-open --content-type image "$img" &>/dev/null ||\ {
+if [ "$img" == "" ];
+then echo "No such jpg files in this dir.";
+else echo "$img are choosed!";
+fi ||\ }
+
+}
+declare -f -x imjpgrand
+function brandomusicq {
+# Created by @luisadha 
+
+  set +m
+  echo 'y' > ~/.local/bin/answer.txt;
+  
+  test $(echo $PATH | grep -o '/system/bin' | head -n1);
+
+if [ $? -eq 0 ]; then
+  
+  function mainn() {
+  
+    (brandomusic & input text y & brandomusic &>/dev/null )
+    brandomusic-cache-clear.sh &> /dev/null;
+  }
+mainn;
+
+else 
+  echo "Please set value '/system/bin' into your \$PATH."
+  echo "Before proced this action!"
+  return 1
+fi
+
+}
+declare -f -x brandomusicq
+function brandomusicx {
+   # Created by @luisadha
+   help() {
+echo -e "BrandomusicXtended (brandomusicx) is an shortcut for function brandomusic.\n" >&2;
+_about_author
+echo -e "Powered by TERMUX API\n
+Available options : " >&2;
+
+  echo -e " [\"help\", \"kill\", \"pause\", \"resume\", \"shuffle\" ]";
+}
+
+opti="$1"
+if [ -z "$opti" ]; then
+  help;
+
+elif [ "$opti" == "shuffle" ] || [ "$opti" == "play" ]; then
+cd ~
+termux-media-player play "$(realpath "$(busybox ls **/*.mp3 | shuf -n1)" )"
+cd - &>/dev/null;
+elif [ "$opti" == "help" ]; then
+  help;
+elif [ "$opti" == "resume" ]; then
+termux-media-player play;
+printf "Play songs with Type \`${FUNCNAME[0]}'.\n"
+elif [ "$opti" == "pause" ]; then
+termux-media-player pause;
+elif [ "$opti" == "kill" ]; then
+termux-media-player stop;
+ else
+echo "see: \`${FUNCNAME[0]} help' more details."
+fi
+}
+declare -f -x brandomusicx
 function brandomusic {
 # builtin alrc-termux 
-# USAGE : brandomusic.sh DIR...
+# USAGE : brandomusic DIR...
 # Version: v1.2.2 : (What's new)
 #  - Add feature custom parameter
 #  - Add feature work without parameter 
@@ -212,6 +538,11 @@ function brandomusic {
 #  - Fix minor bug on variable 'local file'
 #  - Add feature one interactive input
 #  - Add feature Time out within timeout toast
+# Version: v1.4.6
+#  - Add function (brandomusic)x 
+#  - Add function (brandomusic)q
+#  - Rename termux-toast
+#
 
 # Pemutar musik dinamis menggunakan "$PREFIX/bin/am"
 #
@@ -258,11 +589,11 @@ EOF
     case "$answer" in
         [Yy]* )
  eval `am start -a android.intent.action.VIEW -d file://"${tmp}" -t ${format} ` &>/dev/null; 
-# sleep 1
+ sleep 1
 echo
  brandomusic-cache-clear.sh
 cd - &>/dev/null;;
-        * ) rm -f "${tmp}" ; termux-toast "Timeout!"; cd - &>/dev/null; return 0;;
+        * ) rm -f "${tmp}" ; termux-toast "timeout or done!"; cd - &>/dev/null; return 0;;
     esac
 
 }
@@ -365,24 +696,62 @@ function duplicatefind {
 find -not -empty -type f -printf "%s\n" | sort -rn | uniq -d | xargs -I{} -n1 find -type f -size {}c -print0 | xargs -0 md5sum | sort | uniq -w32 --all-repeated=separate
 }
 declare -f -x duplicatefind
-#if ! source ctypes.sh; then
-#    echo "please install ctypes.sh to continue"
-#fi
+function alvar()
+{
+#  before egvarexpan2
+#  now renamed to alvar
 
-# source ctypes.sh
-# if any error of these, fix with alias fixctypes-source 
-# bash: declare: NULL: readonly variable                     bash: declare:
-# STDIN_FILENO: readonly variable             bash: declare: 
-# TDOUT_FILENO: readonly variable            bash: declare: 
-# STDERR_FILENO: readonly variable
+  # Copyright (c) 2023 @luisadha
+  # GNU/GPLv3 
+
+function main()
+(
+
+  arg="$1";
+  eval "echo" \$\{\!"$arg"\*\}
+
+)
+
+args="$1"
+
+if [ -z "$args" ]; then
+
+function usage()
+(
+echo '[' && type alvar | grep -w '$args' | awk '{print $5}' | sed 's/\];//g' | sed 's/\'\$args'//g' | sed "s/\"/\",/g" | cut -c"3-"  | sed "s/pe//" | sed s'/^/\"/' | sed '1,2 s/\"//g' | sed '/./,$!d' | sort && echo ']'
+)
+echo -e "Usage : alvar VARIABLE NAME" >&2;
+echo -e "alvar BASH" >&2;
+echo -e ""
+echo -e "Available options: \n" >&2;
+usage | xargs -d '\n' | cut -c"1,3-34",37
+
+elif [ "$args" == "-nf" ]; then eval "echo" "$(main $2 | awk '{print $NF}')";
+elif [ "$args" == "-xnf" ]; then eval "echo" "\$$(main $2 | awk '{print $NF}')";
+elif [ "$args" == "-t" ]; then eval "echo" "$(main "$2" |  wc -w)";
+elif [ "$args" == "-n" ]; then
+local egvarexpan2_notif=`echo "$2" | grep -E ^\-?[0-9]*\.?[0-9]+$`
+int="${egvarexpan2_notif:?'require number after '-n'.'}"
+  eval "echo" "$(main $3 | cut -f$int -d ' ')";
+elif [ "$args" == "-xn" ]; then
+local egvarexpan2_notif=`echo "$2" | grep -E ^\-?[0-9]*\.?[0-9]+$`
+int2="${egvarexpan2_notif:?'require number after '-xn'.'}"
+  eval "echo" "\$$(main $3 | cut -f$int2 -d ' ')";
+else
+ main $1 $2 $3;
+fi
+}
+declare -f -x alvar
 
 set +o noclobber
 export PATH="${PATH}:$HOME/.local/bin"
 ADDON_BRANDO="brandomusic-cache-clear.sh"
+CHECKIP_FILES="check_ip.sh"
 
 cat <<- "EOF" > $HOME/.local/bin/$ADDON_BRANDO
 
 #!/usr/bin/env bash
+# by luisadha
 # generated by brandomusic
 mapfile -d '' content < $HOME/.local/bin/answer.txt
 content="${content[*]%$'\n'}"
@@ -400,4 +769,49 @@ else
 fi
 
 EOF
+
+#
+cat <<- "EOF" > $HOME/.local/bin/$CHECKIP_FILES
+
+#!/usr/bin/env bash
+
+# Animations-test.sh
+
+# library by myTermux dotfiles
+# edit some
+
+HELPERS=(
+  animation check_ip
+)
+
+for HELPER in ${HELPERS[@]}; do
+  source ~/luisadha/progress-bar/helper/${HELPER}.sh
+done
+
+function main() {
+mulai
+}
+main
+EOF
+
 chmod +x $HOME/.local/bin/$ADDON_BRANDO
+chmod +x $HOME/.local/bin/$CHECKIP_FILES
+
+#if ! source ctypes.sh; then
+#    echo "please install ctypes.sh to continue"
+ #fi
+
+# source ctypes.sh
+# if any error of these, fix with alias fixctypes-source
+# bash: declare: NULL: readonly variable
+  #       bash: declare:
+# STDIN_FILENO: readonly variable             bash: declar
+   #   e:
+# TDOUT_FILENO: readonly variable            bash: declare
+    #  :
+# STDERR_FILENO: readonly variable
+#
+#
+ echo '_alcat' >> ~/.bash_history
+ set +o history
+
