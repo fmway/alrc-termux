@@ -70,9 +70,11 @@ if [ "$(basename ${_last_prog} 2>/dev/null )" != "$_filename" ]; then
 command_not_found_handle ${_function_name} || \
 # echo -e "\n${_function_name}: command not found" >&2;
  unset _alcat;
+ set -o history 
   return 1
 else
  cat "$_last_prog";
+ set -o history 
 fi
  return 0
 }
