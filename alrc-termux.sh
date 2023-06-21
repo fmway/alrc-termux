@@ -814,6 +814,6 @@ chmod +x $HOME/.local/bin/$CHECKIP_FILES
 # STDERR_FILENO: readonly variable
 #
 #
- echo '_alcat' >> ~/.bash_history
+
  set +o history
 
