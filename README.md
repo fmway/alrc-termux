@@ -48,6 +48,11 @@ usage#2:
 
   rm -rf ~/alrc-termux & Do method number 1
 
+### Testing
+    - Termux (Passing)
+    - Proot  (experimental)
+    - Replit (Work, but bad idea)
+
 ### Doc
 
 https://telegra.ph/Sejarah-Alrc-termux-02-23
