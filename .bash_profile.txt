@@ -31,6 +31,7 @@ shopt -s cdspell
 shopt -s cmdhist
 
 PROMPT_DIRTRIM=2
+BASH_ARGV0='bash'
 
 
 if [ -n "$SSH_CLIENT" ]; then text=" ssh"
