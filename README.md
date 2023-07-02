@@ -52,6 +52,8 @@ usage#2:
     - Termux (Passing)
     - Proot  (experimental)
     - Replit (Work, but bad idea)
+### Bug
+```be careful installing other dotfiles, it can cause unwanted bugs/errors due to misconfiguration.  first uninstall alrc-termux if you want to try using other dotfiles. termux-desktop causes imjpgrand to not work and other weird bugs``
 
 ### Doc
 
