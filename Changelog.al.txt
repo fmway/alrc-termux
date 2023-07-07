@@ -63,6 +63,6 @@ _ check_ip.sh files added
 - Rename aliases, function and etc.
 - bug Fix brandomusicx when call through proot-distro
 - bug fix proot-distro login <YOUR DISTRO> --termux-home
-- and etc
-
+- .bash_profile remake
+- add .bashrc
 
