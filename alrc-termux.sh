@@ -399,7 +399,7 @@ alias prefix='cd $PREFIX'
 alias preview='fzf --preview='\''bat --color=always --style=numbers --theme OneHalfDark {}'\'' --preview-window=down'
 alias proot-dinstalled='cd /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs; ls;'
 alias proot-dlogin='proot-distro login '
-#alias al_refresh_profile='source /data/data/com.termux/files/home/.bash_profile' #for refresh profile
+alias al_refresh_profile='source /data/data/com.termux/files/home/.bash_profile' #for refresh profile
 alias vendor='getprop ro.product.manufacturer'
 # add periode 28-29 March
 alias loghis='echo 'login' >> ~/.bash_history; login'
