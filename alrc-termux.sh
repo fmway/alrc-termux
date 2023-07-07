@@ -123,6 +123,10 @@ function alcat () {
 cat ~/.local/bin/$NAME
 }
 
+function al_opt () {
+al help | jq .
+}
+
 function al_set_window() {
 
     title="$*"
@@ -495,12 +499,14 @@ declare -f -x brandomusicq
 function brandomusicx {
    # Created by @luisadha
    help() {
+(
 echo -e "BrandomusicXtended (brandomusicx) is an shortcut for function brandomusic.\n" >&2;
 _about_author
 echo -e "Powered by TERMUX API\n
 Available options : " >&2;
 
-  echo -e " [\"help\", \"kill\", \"pause\", \"resume\", \"shuffle\" ]";
+  echo -e " [\"help\", \"kill\", \"pause\", \"resume\", \"shuffle\" ]"; 
+  )
 }
 
 opti="$1"
@@ -509,7 +515,7 @@ if [ -z "$opti" ]; then
 
 elif [ "$opti" == "shuffle" ] || [ "$opti" == "play" ]; then
 cd ~
-termux-media-player play "$(realpath "$(busybox ls **/*.mp3 | shuf -n1)" )"
+termux-media-player play "$(realpath "$(busybox ls ~/**/*.mp3 | shuf -n1)" )"
 cd - &>/dev/null;
 elif [ "$opti" == "help" ]; then
   help;
