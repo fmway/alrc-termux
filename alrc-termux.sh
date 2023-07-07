@@ -79,7 +79,7 @@ fi
  return 0
 }
 
-function install_modal () {
+function al_export_func () {
 local opts="$1"
 local mod_name=("imjpgrand" "ranpper-termux" "brandomusicx")
 if [ -z "$opts" ]; then
@@ -115,7 +115,7 @@ fi
 
 }
 
-function alog () {
+function al_log () {
 cat ~/.local/bin/Changelog.al.txt
 }
 
@@ -123,7 +123,7 @@ function alcat () {
 cat ~/.local/bin/$NAME
 }
 
-function set_window() {
+function al_set_window() {
 
     title="$*"
     echo -ne "\033]0;$title \007"
@@ -321,7 +321,7 @@ usage#2: whatisal print this help message and return
 # ----- ALRC MISC ------- #
 # -------------------------------- #
 source $0 > /dev/null 2>&1 && until false; do sleep 1; done
-set_window "successfully script called via source"; al; 
+al_set_window "successfully script called via source"; al; 
 # --------------------------------- #
 
 # ----- BASHRC ---------- #
@@ -349,8 +349,8 @@ alias r='fc -e -'
 alias alcatalias='alcat | grep -e "^alias"'
 alias aligrep='alias | grep'
 alias asciivideo="mpv --no-config  --vo=caca --really-quiet"
-alias brandomusic-set_autoremove="sed 's/\#\ brandomusic-cache-clear\.sh/\ brandomusic-cache-clear\.sh/g' $FULLNAME > $FULLNAME.t; mv -f $FULLNAME.t $FULLNAME > /dev/null 2>&1; refreshprofile;"
-alias brandomusic+set_autoremove="sed 's/\ brandomusic-cache-clear\.sh/\#\ brandomusic-cache-clear\.sh/g' $FULLNAME > $FULLNAME.t; mv -f $FULLNAME.t $FULLNAME > /dev/null 2>&1; refreshprofile;"
+alias brandomusic-set_autoremove="sed 's/\#\ brandomusic-cache-clear\.sh/\ brandomusic-cache-clear\.sh/g' $FULLNAME > $FULLNAME.t; mv -f $FULLNAME.t $FULLNAME > /dev/null 2>&1; al_refresh_profile;"
+alias brandomusic+set_autoremove="sed 's/\ brandomusic-cache-clear\.sh/\#\ brandomusic-cache-clear\.sh/g' $FULLNAME > $FULLNAME.t; mv -f $FULLNAME.t $FULLNAME > /dev/null 2>&1; al_refresh_profile;"
 alias cd0='cd ~/storage/shared'
 alias cdd='cd ~/storage/downloads'
 alias cddc='cd ~/storage/dcim'
@@ -395,13 +395,13 @@ alias prefix='cd $PREFIX'
 alias preview='fzf --preview='\''bat --color=always --style=numbers --theme OneHalfDark {}'\'' --preview-window=down'
 alias proot-dinstalled='cd /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs; ls;'
 alias proot-dlogin='proot-distro login '
-#alias refresh_profile='source /data/data/com.termux/files/home/.bash_profile' #for refresh profile
+#alias al_refresh_profile='source /data/data/com.termux/files/home/.bash_profile' #for refresh profile
 alias vendor='getprop ro.product.manufacturer'
 # add periode 28-29 March
 alias loghis='echo 'login' >> ~/.bash_history; login'
 # convert loghis to login in body .bash_history
 # 19 juni
-alias refresh_source='echo '_alcat' >> ~/.bash_history && source ~/.local/bin/alrc-termux.sh'
+alias al_enable_alcat='echo '_alcat' >> ~/.bash_history && source ~/.local/bin/alrc-termux.sh'
 ## FUNCTION
 
 function cattyp() {
@@ -419,7 +419,7 @@ fi
 
 }
 declare -f -x cattyp
-function al_scan_opt {
+function al_opt_scan {
 # by luisadha
 declare -a "$(al help 2>&1 | sed 's/,//g' | sed 's/\[//g' | sed 's/\]//g' | sed 's/^/VARIABEL=/g' | sed 's/\"//g' )"
 
@@ -429,7 +429,7 @@ for i in ${VARIABEL[@]}; do
 done
 echo "Scanned!"
 }
-declare -f -x al_scan_opt
+declare -f -x al_opt_scan
 function check_dependency() {
 # by luisadha
     if ! (builtin command -V "$1" >/dev/null 2>&1); then
