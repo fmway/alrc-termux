@@ -1,16 +1,4 @@
-#Just pure awesomeness!
-bind '"\e[A"':history-search-backward
-bind '"\e[B"':history-search-forward
-bind Space:magic-space
-
-# Misc -------------------------------------------------------------
-# don't put duplicate lines in the history. See bash(1) for more options
-# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups:erasedups
-
-# ... or force ignoredups and ignorespace
-export BASH_ARGV0='bash'
-
+BASH_ARGV0='bash'
 #Just pure awesomeness!
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
@@ -91,38 +79,5 @@ fi
 
 # Untuk mengaktifkan fitur _alcat, biarkan kode dibawah ini menjadi yang terakhir dimuat
 
-#al_opt
-#al_ref_profile
-#al_opt_scan
 al_enable_alcat 2>/dev/null || echo "alrc-termux not installed, can't refresh_source!"
 # ket: akan mengaktifkan fitur _alcat dan memanggil fungsi al jika modul alrc tidak ditemukan perintah echo akan di tamplikan ke layar
-
-# export HISTCONTROL=ignoreboth:erasedups
-
-# Don't put 'history' commands themselves in the history
-export HISTIGNORE='history*'
-
-# Keep no more than 1,000,000 lines
-export HISTFILESIZE=1000000
-export HISTSIZE=1000000
-
-# Append, don't overwrite history
-shopt -s histappend
-
-# Check window size after each command to avoid annoying effects of resizing
-shopt -s checkwinsize
-
-# Ignore typoes
-shopt -s cdspell
-
-# This will ensure that multiple line commands stay together in your history.
-shopt -s cmdhist
-
-PROMPT_DIRTRIM=2
-BASH_ARGV0='bash'
-
-
-if [ -n "$SSH_CLIENT" ]; then text=" ssh"
-
-fi
-alias test_opentelegram="open https://t.me/adharudin14"
