@@ -65,4 +65,8 @@ _ check_ip.sh files added
 - bug fix proot-distro login <YOUR DISTRO> --termux-home
 - .bash_profile remake
 - add .bashrc
+- add function al_opt()
+- fix bug help at subshells
+- etc
+
 
