@@ -38,17 +38,19 @@ usage#2:
       git clone https://github.com/luisadha/alrc-termux.git ~/.local/share/alrc-termux
       ```
    + link alrc to your bin path
-      ```
+      ```sh
       ln -s ~/.local/share/alrc-termux/alrc ~/.local/bin/alrc
       ```
  
 ## Uninstall
-   
+   ```sh
    alrc uninstall
+   ```
 
 ## Update
-
+   ```sh
    alrc update
+   ```
 
 ### Testing
     - Termux (Passing)
