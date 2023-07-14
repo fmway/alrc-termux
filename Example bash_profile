@@ -1,7 +1,0 @@
-# Just example 
-if [ -r /data/data/com.termux/files/home/.local/bin/alrc-termux.sh ]; then
-echo -e "\n**Alrc-Termux Activated**"
- . /data/data/com.termux/files/home/.local/bin/alrc-termux.sh
-fi
-
-export PATH=$PATH:/data/data/com.termux/files/home/.local/bin
