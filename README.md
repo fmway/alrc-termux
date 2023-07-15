@@ -10,7 +10,7 @@ alias al come with mkshrc mod by @7175-xda-devoloper, but function named al come
 
 usage#1:
 
- source **~/downloads/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file
+ source <(**~/.local/bin/alrc env**) from within your **~.bash\_profile** or **~/.bashrc** file
 
 usage#2: 
 
@@ -28,25 +28,29 @@ usage#2:
 
 ## Install
 
-1. cd $HOME &&```git clone https://github.com/luisadha/alrc-termux.git```
-
-2. cd alrc-termux
-
-3. make install
-
-4. source **~/.local/bin/alrc-termux.sh** from within your **~.bash\_profile** or **~/.bashrc** file (preferably .bash_profile) and add one lane on the PATH variable 
-
-   export PATH=$PATH:$HOME/.local/bin
+### Automatic
+   ```sh
+   curl -fSsL https://raw.githubusercontent.com/fmway/alrc-termux/master/install.sh | bash
+   ```
+### Manual
+   + clone this repository
+      ```sh
+      git clone https://github.com/luisadha/alrc-termux.git ~/.local/share/alrc-termux
+      ```
+   + link alrc to your bin path
+      ```sh
+      ln -s ~/.local/share/alrc-termux/alrc ~/.local/bin/alrc
+      ```
  
 ## Uninstall
-   
-   bash uninstall-alrc-termux.sh
+   ```sh
+   alrc uninstall
+   ```
 
 ## Update
-
-  Reclone this repo and then type make install
-
-  rm -rf ~/alrc-termux & Do method number 1
+   ```sh
+   alrc update
+   ```
 
 ### Testing
     - Termux (Passing)

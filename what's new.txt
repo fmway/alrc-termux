@@ -1,3 +1,5 @@
+command alrc to manage alrc-termux
+
  open-random-jpg-files --> imjpgrand
 
  brandomusic varian X --> brandomusicx
