@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-
+# By fmway
 REPO="https://github.com/luisadha/alrc-termux.git"
 ALRC_HOME="$HOME/.local/share/alrc-termux"
 #ALRC_HOME="$HOME/.alrc-termux"
