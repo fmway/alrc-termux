@@ -10,7 +10,7 @@ alias al come with mkshrc mod by @7175-xda-devoloper, but function named al come
 
 usage#1:
 
- source <(**~/.local/bin/alrc env**) from within your **~.bash\_profile** or **~/.bashrc** file
+ source <(~/.local/bin/alrc env) from within your **~/.bash_profile** or **~/.bashrc** file
 
 usage#2: 
 
@@ -33,11 +33,11 @@ usage#2:
    curl -fSsL https://raw.githubusercontent.com/fmway/alrc-termux/master/install.sh | bash
    ```
 ### Manual
-   + clone this repository
+   1. clone this repository
       ```sh
       git clone https://github.com/luisadha/alrc-termux.git ~/.local/share/alrc-termux
       ```
-   + link alrc to your bin path
+   2. link alrc to your bin path
       ```sh
       ln -s ~/.local/share/alrc-termux/alrc ~/.local/bin/alrc
       ```
