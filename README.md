@@ -10,7 +10,7 @@ alias al come with mkshrc mod by @7175-xda-devoloper, but function named al come
 
 usage#1:
 
- source <(~/.local/bin/alrc env) from within your **~/.bash_profile** or **~/.bashrc** file
+ source <(**~/.local/bin/alrc env**) from within your **~/.bash_profile** or **~/.bashrc** file
 
 usage#2: 
 
