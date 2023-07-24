@@ -27,6 +27,7 @@ export ALRC_HOME="$(cd -P -- "$(dirname -- "$(readlink "${BASH_SOURCE[0]}")")" &
 export ALRC_HOME_alt="$HOME/.local/share/alrc-termux"
 export NAME="$(basename $ALRC_HOME_alt.sh)"
 export FULLNAME="$ALRC_HOME_alt"
+export FULLPATH="$ALRC_HOME_alt/$NAME"
 
 source $ALRC_HOME_alt/lib/check_dependency.sh
 check_dependency awk
@@ -366,8 +367,8 @@ alias al_login='source $ALRC_HOME_alt/$NAME'
 alias alcatalias='alcat | grep -e "^alias"'
 alias aligrep='alias | grep'
 alias asciivideo="mpv --no-config  --vo=caca --really-quiet"
-alias brandomusic-set_autoremove="sed 's/\#\ brandomusic-cache-clear\.sh/\ brandomusic-cache-clear\.sh/g' $NAME > $NAME.t; mv -f $NAME.t $NAME > /dev/null 2>&1; al_login;"
-alias brandomusic+set_autoremove="sed 's/\ brandomusic-cache-clear\.sh/\#\ brandomusic-cache-clear\.sh/g' $NAME > $NAME.t; mv -f $NAME.t $NAME > /dev/null 2>&1; al_login;"
+alias brandomusic-set_autoremove="sed 's/\#\ brandomusic-cache-clear\.sh/\ brandomusic-cache-clear\.sh/g' $FULLPATH > $FULLPATH.t; mv -f $FULLPATH.t $FULLPATH > /dev/null 2>&1; al_login;"
+alias brandomusic+set_autoremove="sed 's/\ brandomusic-cache-clear\.sh/\#\ brandomusic-cache-clear\.sh/g' $FULLPATH > $FULLPATH.t; mv -f $FULLPATH.t $FULLPATH > /dev/null 2>&1; al_login;"
 
 alias cd0='cd ~/storage/shared'
 alias cdd='cd ~/storage/downloads'
