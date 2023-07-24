@@ -30,7 +30,7 @@ usage#2:
 
 ### Automatic
    ```sh
-   curl -fSsL https://raw.githubusercontent.com/fmway/alrc-termux/master/install.sh | bash
+   curl -fSsL https://raw.githubusercontent.com/luisadha/alrc-termux/master/install.sh | bash
    ```
 ### Manual
    1. clone this repository
