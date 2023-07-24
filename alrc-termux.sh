@@ -20,15 +20,13 @@
 #export NAMA="${BASH_SOURCE[0]}"
 #export NAME="${0:+$(printf '%s\n' "$(basename -- "$(realpath ${BASH_SOURCE})")" )}"
 #FULLNAME="${0:+$(printf '%s\n' "$BASH_SOURCE" )}"
-VERSION="4.0.1"
+VERSION="4.0.2"
 
 
 export ALRC_HOME="$(cd -P -- "$(dirname -- "$(readlink "${BASH_SOURCE[0]}")")" && pwd)"
 export ALRC_HOME_alt="$HOME/.local/share/alrc-termux"
 export NAME="$(basename $ALRC_HOME_alt.sh)"
 export FULLNAME="$ALRC_HOME_alt"
-# Add 26 March
-# add 19 Jun 2023
 
 source $ALRC_HOME_alt/lib/check_dependency.sh
 check_dependency awk
@@ -362,11 +360,14 @@ alias nameref='builtin typeset -n'
 alias r='fc -e -'
 
 #  personal aliases
+
+alias al_activate='source <(~/.local/bin/alrc env)'
 alias alcatalias='alcat | grep -e "^alias"'
 alias aligrep='alias | grep'
 alias asciivideo="mpv --no-config  --vo=caca --really-quiet"
-alias brandomusic-set_autoremove="sed 's/\#\ brandomusic-cache-clear\.sh/\ brandomusic-cache-clear\.sh/g' $NAME > $NAME.t; mv -f $NAME.t $NAME > /dev/null 2>&1; al_refresh_profile;"
-alias brandomusic+set_autoremove="sed 's/\ brandomusic-cache-clear\.sh/\#\ brandomusic-cache-clear\.sh/g' $NAME > $NAME.t; mv -f $NAME.t $NAME > /dev/null 2>&1; al_refresh_profile;"
+alias brandomusic-set_autoremove="sed 's/\#\ brandomusic-cache-clear\.sh/\ brandomusic-cache-clear\.sh/g' $NAME > $NAME.t; mv -f $NAME.t $NAME > /dev/null 2>&1; al_activate;"
+alias brandomusic+set_autoremove="sed 's/\ brandomusic-cache-clear\.sh/\#\ brandomusic-cache-clear\.sh/g' $NAME > $NAME.t; mv -f $NAME.t $NAME > /dev/null 2>&1; al_activate;"
+
 alias cd0='cd ~/storage/shared'
 alias cdd='cd ~/storage/downloads'
 alias cddc='cd ~/storage/dcim'
@@ -395,7 +396,8 @@ alias lta='exa --icons --tree -lgha'
 alias lol='echo 'your\ mom''
 alias neodistro='neofetch --ascii_distro'
 alias check_jpgfiles='cd $OLDPWD; cd /sdcard; printf "%s %s %s %s\n" "$(find . ! -readable -prune -o -name "*.jpg" -type f -print | wc -l)" "totals .jpg" "files on /sdcard"; cd - &>/dev/null;'
-
+alias check_emptyfolder='cd $OLDPWD; cd /sdcard; printf "%s %s %s %s\n" "$(find . ! -readable -prune -o -type d -empty -print | wc -l)" "totals empty " "folder on /sdcard"; cd - &>/dev/null;'
+alias check_emptyfiles='cd $OLDPWD; cd /sdcard; printf "%s %s %s %s\n" "$(find . ! -readable -prune -o -type f -empty -print | wc -l)" "totals empty " "files on /sdcard"; cd - &>/dev/null;'
 alias check_nomedia='cd $OLDPWD; cd /sdcard; printf "%s %s %s\n" "$(find . ! -readable -prune -o -name "*.nomedia" -type f -print | wc -l)" "totals .nomedia" "on /sdcard"; cd - &>/dev/null;'
 alias open='termux-open'
 alias openpdf='open --content-type pdf'
