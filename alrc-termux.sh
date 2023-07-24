@@ -362,11 +362,12 @@ alias r='fc -e -'
 #  personal aliases
 
 alias al_activate='source <(~/.local/bin/alrc env)'
+alias al_login='source $ALRC_HOME_alt/$NAME'
 alias alcatalias='alcat | grep -e "^alias"'
 alias aligrep='alias | grep'
 alias asciivideo="mpv --no-config  --vo=caca --really-quiet"
-alias brandomusic-set_autoremove="sed 's/\#\ brandomusic-cache-clear\.sh/\ brandomusic-cache-clear\.sh/g' $NAME > $NAME.t; mv -f $NAME.t $NAME > /dev/null 2>&1; al_activate;"
-alias brandomusic+set_autoremove="sed 's/\ brandomusic-cache-clear\.sh/\#\ brandomusic-cache-clear\.sh/g' $NAME > $NAME.t; mv -f $NAME.t $NAME > /dev/null 2>&1; al_activate;"
+alias brandomusic-set_autoremove="sed 's/\#\ brandomusic-cache-clear\.sh/\ brandomusic-cache-clear\.sh/g' $NAME > $NAME.t; mv -f $NAME.t $NAME > /dev/null 2>&1; al_login;"
+alias brandomusic+set_autoremove="sed 's/\ brandomusic-cache-clear\.sh/\#\ brandomusic-cache-clear\.sh/g' $NAME > $NAME.t; mv -f $NAME.t $NAME > /dev/null 2>&1; al_login;"
 
 alias cd0='cd ~/storage/shared'
 alias cdd='cd ~/storage/downloads'
