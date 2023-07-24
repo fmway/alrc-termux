@@ -494,7 +494,7 @@ if [ $? -eq 0 ]; then
   function mainn() {
   
     (brandomusic & input text y & brandomusic &>/dev/null )
-# brandomusic-cache-clear.sh &> /dev/null;
+ brandomusic-cache-clear.sh &> /dev/null;
   }
 mainn;
 
@@ -609,7 +609,7 @@ EOF
  eval `am start -a android.intent.action.VIEW -d file://"${tmp}" -t ${format} ` &>/dev/null; 
  sleep 1
 echo
-# brandomusic-cache-clear.sh
+ brandomusic-cache-clear.sh
 cd - &>/dev/null;;
         * ) rm -f "${tmp}" ; termux-toast "timeout or done!"; cd - &>/dev/null; return 0;;
     esac
