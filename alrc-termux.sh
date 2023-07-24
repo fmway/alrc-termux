@@ -483,7 +483,7 @@ fi ||\ }
 declare -f -x imjpgrand
 function brandomusicq {
 # Created by @luisadha 
-
+  set +o noclobber
   set +m
   echo 'y' > $ALRC_HOME_alt/answer.txt;
   
@@ -494,7 +494,7 @@ if [ $? -eq 0 ]; then
   function mainn() {
   
     (brandomusic & input text y & brandomusic &>/dev/null )
-brandomusic-cache-clear.sh &> /dev/null;
+# brandomusic-cache-clear.sh &> /dev/null;
   }
 mainn;
 
@@ -576,7 +576,7 @@ function brandomusic {
 # License : GNU/GPLv3
 # Copyright (c) 2023 @luisadha
 
-
+set +o noclobber
 local format='audio/mp3'
 
 local file="${1:+"${1}/*.mp3"}" #jika argumen $1 is not NULL
@@ -609,7 +609,7 @@ EOF
  eval `am start -a android.intent.action.VIEW -d file://"${tmp}" -t ${format} ` &>/dev/null; 
  sleep 1
 echo
-brandomusic-cache-clear.sh
+# brandomusic-cache-clear.sh
 cd - &>/dev/null;;
         * ) rm -f "${tmp}" ; termux-toast "timeout or done!"; cd - &>/dev/null; return 0;;
     esac
