@@ -87,6 +87,6 @@ eval "(imjpgrand ~/daydreams > /dev/null 2>&1)"
 # Untuk mengaktifkan fitur _alcat, biarkan kode dibawah ini menjadi yang terakhir dimuat
 
 
-al_enable_alcat 2>/dev/null || echo "alrc-termux not installed, can't refresh_source!"
+: 'al_enable_alcat 2>/dev/null || echo "alrc-termux not installed, can't refresh_source!" '
 # ket: akan mengaktifkan fitur _alcat dan memanggil fungsi al jika modul alrc tidak ditemukan perintah echo akan di tamplikan ke layar
 
