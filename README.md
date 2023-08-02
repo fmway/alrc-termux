@@ -57,6 +57,7 @@ usage#2:
     - Proot-distro (experimental)
     - Replit (Work, but bad idea)
     - Wayland (error tester by alif)
+    - AndroidIDE Terminal based Termux (work but not recomended)
 ### Bug
 ```be careful installing other dotfiles, it can cause unwanted bugs/errors due to misconfiguration.  first uninstall alrc-termux if you want to try using other dotfiles. termux-desktop causes imjpgrand to not work and other weird bugs```
 
