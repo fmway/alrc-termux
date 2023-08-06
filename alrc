@@ -1,4 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
+#!/data/data/com.itsaky.androidide/files/usr/bin/bash
+
 # By fmways
 ALRC_HOME="$(cd -- "$(dirname -- "$(realpath "${BASH_SOURCE[0]}")")" &> /dev/null && pwd)"
 VERSION="$(cat "${ALRC_HOME}/alrc-termux.sh" | sed -n 's/^# version : //p')"
