@@ -20,7 +20,7 @@
 #export NAMA="${BASH_SOURCE[0]}"
 #export NAME="${0:+$(printf '%s\n' "$(basename -- "$(realpath ${BASH_SOURCE})")" )}"
 #FULLNAME="${0:+$(printf '%s\n' "$BASH_SOURCE" )}"
-VERSION="4.0.2"
+VERSION="4.0.3"
 
 
 export ALRC_HOME="$(cd -P -- "$(dirname -- "$(readlink "${BASH_SOURCE[0]}")")" && pwd)"
@@ -30,7 +30,9 @@ export FULLNAME="$ALRC_HOME_alt"
 export FULLPATH="$ALRC_HOME_alt/$NAME"
 
 source $ALRC_HOME_alt/lib/check_dependency.sh
-check_dependency awk
+check_dependency 
+
+
 check_dependency bc
 check_dependency tput
 check_dependency busybox
@@ -145,15 +147,21 @@ function al_set_window() {
 }
 function al() {
 
-#  echo "$(basename $0)"
-local my_terminal="$(ps | grep 'term' | awk '{print $9}')"
-local uptimes="$(busybox uptime -s)" > /dev/null 2>&1; 
-local batteries="$(termux-battery-status | head -n 3 | awk '{print $2}' | tail -n 1| sed 's/,/%/g')"
+##
 
-# local packages="$(ls /system/bin/| wc -l) (bin) / $(ls /system/xbin/ | wc -l) (xbin)" > /dev/null 2>&1; 
-local packages_termux="$(ls /data/data/com.termux/files/usr/bin | wc -l) (termux usr/bin) " &>/dev/null;
-local shell="$(echo "$0" | awk '{gsub(/.*[/]|[.].*/, "", $0)} 1'
-) ";
+local my_terminal="$(echo $(dirname ${PREFIX:=$SYSROOT}))"
+local uptimes="$(busybox uptime -s)" > /dev/null 2>&1;
+local batt="$(termux-battery-status 2>&1 | grep -cq 'command not found' || termux-battery-status | head -n 3 | awk '{print $2}' | tail -n 1| sed 's/,/%/g' )"
+local prefix="$PREFIX/bin" 2> /dev/null;
+local sysroot="$SYSROOT/bin" 2> /dev/null;
+
+
+local batteries="${batt:-$(echo "unknown")}" > /dev/null 2>&1;
+
+# local packages="$(ls /system/bin/| wc -l) (bin) / $(ls /system/xbin/ | wc -l) (xbin)" > /dev/null 2>&1;
+local packages_termux="$(ls ${prefix} 2>/dev/null || ls ${sysroot} 2>/dev/null | wc -l) (usr/bin) " &>/dev/null;
+local shell="$(echo "$0" | awk '{gsub(/.*[/]|[.].*/, "", $0)} 1') ";
+
 export opt="$1"
 if [ -z "$opt" ]; then
   if [ $(basename $0) == "bash" ] || [ $(basename $0) == "bash.bin" ]; then
@@ -344,8 +352,8 @@ al_set_window "successfully script called via source"; al;
 ### bashrc add  27 jan
  
 ##- Enviroment variable
-unset HOME USER
-HOME="${HOME:=/data/data/com.termux/files/home}" # fix home
+#unset HOME USER
+#HOME="${HOME:=/data/data/com.termux/files/home}" # fix home
 USER="${USER:-$(id -un)}"
 HOSTNAME="$(getprop net.hostname)"
 PS1='\[\e[0;36m\]\u@${HOSTNAME}:\w${text}$\[\e[m\]'
